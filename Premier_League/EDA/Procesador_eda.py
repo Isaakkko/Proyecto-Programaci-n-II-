@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 #carga del csv
 df = pd.read_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\RAW(CRUDO)\premier.csv")
@@ -24,5 +25,13 @@ print(df.isnull().sum())
 #Eliminar en "Age" los numeros innecesarios "-###"
 df["Age"]= df["Age"].str.split("-").str[0]
 df["Age"]= pd.to_numeric(df["Age"], errors="coerce")
-
 print(df["Age"].head())
+
+#columna datetime
+df["Date"]= pd.to_datetime(df["Date"])
+print(df["Date"].head())
+
+df
+
+#Guardar el dataframe limpio
+#premier_clean_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\PROCESSED(LIMPIO)"), index=false)
