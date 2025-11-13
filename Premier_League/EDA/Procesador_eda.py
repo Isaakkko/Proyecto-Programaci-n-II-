@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 #carga del csv
 df = pd.read_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\RAW(CRUDO)\premier.csv")
@@ -31,7 +32,38 @@ print(df["Age"].head())
 df["Date"]= pd.to_datetime(df["Date"])
 print(df["Date"].head())
 
-df
+#Exploracion de valores faltantes
+#grafico de missing values
+missing_values=df.isnull().sum()
+print(missing_values.head())
+sns.barplot(x=missing_values.index,y=missing_values)
+plt.xticks(rotation=90)
+plt.title("Missing Values")
+plt.show()
 
+#eliminar columnas del dataset
+cols_to_delete = [
+    "Dribbles","Tackles","Blocks",
+    "Expected Goals (xG)","Non-Penalty xG (npxG)",
+    "Expected Assists (xAG)","Pass Completion %",
+    "Progressive Passes", "Carries",
+    "Progressive Carries","Dribble Attempts"
+]
+
+df = df.drop(columns=cols_to_delete)
+
+print(df.head())
+
+#Valores duplicasdos
+print("Duplicados:", df.duplicated().sum())
+#Normalizar las columnas categoricas
+#detectarlas
+category_col= df.select_dtypes(include=object).columns
+print(category_col)
+
+#Normalizarlas
+df[category_col] = df[category_col].apply(lambda col: col.str.strip().str.lower())
+
+print(df[category_col].head())
 #Guardar el dataframe limpio
-#premier_clean_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\PROCESSED(LIMPIO)"), index=false)
+df.to_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\PROCESSED(LIMPIO)\premier_clean.csv",index=False)
