@@ -74,14 +74,24 @@ class ProcesadorEDA:
 
     def guardar_dataframe(self):
 #Guardar archivo limpio
-        self.df.to_csv(self.__archivo_salida, index=False)
-        print(f"Dataframe limpio guardado en: {self.__archivo_salida}")
+        self.df.to_csv(self.__archivo_limpio, index=False)
+        print(f"Dataframe limpio guardado en: {self.__archivo_limpio}")
 
 
 # Uso de la clase
-procesador = ProcesadorEDA(
-    archivo_crudo=r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\RAW(CRUDO)\premier.csv",
-    archivo_limpio=r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\PROCESSED(LIMPIO)\premier_clean.csv"
-)
+archivo_crudo = r"../DATA/RAW(CRUDO)/premier.csv"
+archivo_limpio = r"../DATA/PROCESSED(LIMPIO)/premier_clean.csv"
+
+procesador = ProcesadorEDA(archivo_crudo=archivo_crudo, archivo_limpio=archivo_limpio)
+
+procesador.exploracion_inicial()
+procesador.limpieza()
+procesador.exploracion_faltantes()
+procesador.eliminar_columnas()
+procesador.eliminar_duplicados()
+procesador.normalizar_categoricas()
+procesador.guardar_dataframe()
+
+
 
 
