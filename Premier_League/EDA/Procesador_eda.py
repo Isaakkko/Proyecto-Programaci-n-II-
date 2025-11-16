@@ -5,65 +5,83 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#carga del csv
-df = pd.read_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\RAW(CRUDO)\premier.csv")
+class ProcesadorEDA:
+    def __init__(self, archivo_crudo, archivo_limpio):
+        # Inicialización de la clase con los archivos de entrada y salida
+        self.__archivo_crudo = archivo_crudo
+        self.__archivo_limpio = archivo_limpio
+        self.df = pd.read_csv(self.__archivo_crudo)
 
-#----Exploracion Inicial
+    def exploracion_inicial(self):
+        """Exploración inicial del dataframe."""
+#primeras filas
+        print(self.df.head())
 
-#Primeras filas
-print(df.head())
-#stats Basicas
-print(df.describe())
+#stats básicas
+        print(self.df.describe())
+
 #tipo de dato
-print(df.info())
+        print(self.df.info())
+
 #numero de filas y columnas
-print(df.shape)
-#Ver nulos
-print(df.isnull().sum())
+        print(self.df.shape)
 
-#----Limpieza
+#nulos
+        print(self.df.isnull().sum())
 
-#Eliminar en "Age" los numeros innecesarios "-###"
-df["Age"]= df["Age"].str.split("-").str[0]
-df["Age"]= pd.to_numeric(df["Age"], errors="coerce")
-print(df["Age"].head())
+    def limpieza(self):
+        #Eliminar en "Age" los números innecesarios "-###"
+        self.df["Age"] = self.df["Age"].str.split("-").str[0]
+        self.df["Age"] = pd.to_numeric(self.df["Age"], errors="coerce")
+        print(self.df["Age"].head())
 
-#columna datetime
-df["Date"]= pd.to_datetime(df["Date"])
-print(df["Date"].head())
+#Columna datetime
+        self.df["Date"] = pd.to_datetime(self.df["Date"])
+        print(self.df["Date"].head())
 
-#Exploracion de valores faltantes
-#grafico de missing values
-missing_values=df.isnull().sum()
-print(missing_values.head())
-sns.barplot(x=missing_values.index,y=missing_values)
-plt.xticks(rotation=90)
-plt.title("Missing Values")
-plt.show()
+    def exploracion_faltantes(self):
+#Exploración de valores faltantes y gráfico correspondiente
+    # Gráfico de missing values
+        missing_values = self.df.isnull().sum()
+        print(missing_values.head())
+        sns.barplot(x=missing_values.index, y=missing_values)
+        plt.xticks(rotation=90)
+        plt.title("Missing Values")
+        plt.show()
 
-#eliminar columnas del dataset
-cols_to_delete = [
-    "Dribbles","Tackles","Blocks",
-    "Expected Goals (xG)","Non-Penalty xG (npxG)",
-    "Expected Assists (xAG)","Pass Completion %",
-    "Progressive Passes", "Carries",
-    "Progressive Carries","Dribble Attempts"
-]
+    def eliminar_columnas(self):
+#Eliminar columnas innecesarias
+        cols_to_delete = [
+            "Dribbles", "Tackles", "Blocks", "Expected Goals (xG)",
+            "Non-Penalty xG (npxG)", "Expected Assists (xAG)", "Pass Completion %",
+            "Progressive Passes", "Carries", "Progressive Carries", "Dribble Attempts"
+        ]
+        self.df = self.df.drop(columns=cols_to_delete)
+        print(self.df.head())
 
-df = df.drop(columns=cols_to_delete)
+    def eliminar_duplicados(self):
+#Eliminar valores duplicados
+        print(f"Duplicados: {self.df.duplicated().sum()}")
+        self.df = self.df.drop_duplicates()
 
-print(df.head())
+    def normalizar_categoricas(self):
+#Normalizar las columnas categóricas
+        category_col = self.df.select_dtypes(include=object).columns
+        print(category_col)
 
-#Valores duplicasdos
-print("Duplicados:", df.duplicated().sum())
-#Normalizar las columnas categoricas
-#detectarlas
-category_col= df.select_dtypes(include=object).columns
-print(category_col)
+        self.df[category_col] = self.df[category_col].apply(lambda col: col.str.strip().str.lower())
+        print(self.df[category_col].head())
 
-#Normalizarlas
-df[category_col] = df[category_col].apply(lambda col: col.str.strip().str.lower())
+    def guardar_dataframe(self):
+#Guardar archivo limpio
+        self.df.to_csv(self.__archivo_salida, index=False)
+        print(f"Dataframe limpio guardado en: {self.__archivo_salida}")
 
-print(df[category_col].head())
-#Guardar el dataframe limpio
-df.to_csv(r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\PROCESSED(LIMPIO)\premier_clean.csv",index=False)
+
+# Uso de la clase
+procesador = ProcesadorEDA(
+    archivo_crudo=r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\RAW(CRUDO)\premier.csv",
+    archivo_limpio=r"C:\Pycharm\Proyecto Programacion II\Premier_League\DATA\PROCESSED(LIMPIO)\premier_clean.csv"
+)
+
+
