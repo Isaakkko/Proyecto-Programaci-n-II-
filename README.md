@@ -1,11 +1,13 @@
 
 # Colegio Universitario de Cartago
-##Costa Rica
+## Costa Rica
 ![](https://images.seeklogo.com/logo-png/3/1/colegio-universitario-de-cartago-cuc-logo-png_seeklogo-33301.png)
 
-###Realizado por:
+### Realizado por:
 -Isaac Ulloa Calvo
+
 -Jeffrey Jiménez Cordero
+
 -Felipe Montenegro Artavia
 
 # 📊 Premier League Insights
@@ -33,42 +35,55 @@ El proyecto analiza este dataset para identificar patrones, relaciones entre var
 
 Este proyecto sigue una estructura modular orientada a objetos
 
-#✔️ Requerimientos técnicos
+# ✔️ Requerimientos técnicos
 
 Python 3.10+
 
 Librerías:
+
 pandas
+
 numpy
+
 matplotlib
+
 seaborn
-streamlit 
+
+streamlit
 
 
-#👉Contenido  y estructura del repositorio
+👉 Contenido y estructura del repositorio
 
-+ Premier League
-    * CARGA_DATA
-	-cargador_datos
-	-modulo
-    * CLASES
-	-Equipo
-	-Jugador
-	-modulo
-    * DASHBOARDS
-	-visualizador
-    * DATA
-	-PROCESSED(LIMPIO)
-	--premier_clean
-	-RAW(CRUDO)
-	--premier
-    * EDA
-	modulo
-	Procesador_eda
-    * NOTEBOOKS
-	* VISUALIZACIÓN
+```
+Premier League/
+│
+├── CARGA_DATA/
+│ ├── cargador_datos
+│ └── modulo
+│
+├── CLASES/
+│ ├── Equipo
+│ ├── Jugador
+│ └── modulo
+│
+├── DASHBOARDS/
+│ └── visualizador
+│
+├── DATA/
+│ ├── PROCESSED(LIMPIO)/
+│ │ └── premier_clean
+│ └── RAW(CRUDO)/
+│   └── premier
+│
+├── EDA/
+│ ├── modulo
+│ └── Procesador_eda
+│
+├── NOTEBOOKS/
+│
+└── VISUALIZACIÓN/
 
-
+```
 
 # ⚙️ Funcionalidades principales
 
