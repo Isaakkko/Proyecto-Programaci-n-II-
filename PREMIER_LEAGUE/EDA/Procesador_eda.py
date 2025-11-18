@@ -13,7 +13,6 @@ class ProcesadorEDA:
         self.df = pd.read_csv(self.__archivo_crudo)
 
     def exploracion_inicial(self):
-        """Exploración inicial del dataframe."""
 #primeras filas
         print(self.df.head())
 
@@ -39,7 +38,7 @@ class ProcesadorEDA:
         self.df["Date"] = pd.to_datetime(self.df["Date"])
         print(self.df["Date"].head())
 
-    def exploracion_faltantes(self):
+    def valores_faltantes(self):
 #Exploración de valores faltantes y gráfico correspondiente
     # Gráfico de missing values
         missing_values = self.df.isnull().sum()
@@ -78,19 +77,7 @@ class ProcesadorEDA:
         print(f"Dataframe limpio guardado en: {self.__archivo_limpio}")
 
 
-# Uso de la clase
-archivo_crudo = r"../DATA/RAW(CRUDO)/premier.csv"
-archivo_limpio = r"../DATA/PROCESSED(LIMPIO)/premier_clean.csv"
 
-procesador = ProcesadorEDA(archivo_crudo=archivo_crudo, archivo_limpio=archivo_limpio)
-
-procesador.exploracion_inicial()
-procesador.limpieza()
-procesador.exploracion_faltantes()
-procesador.eliminar_columnas()
-procesador.eliminar_duplicados()
-procesador.normalizar_categoricas()
-procesador.guardar_dataframe()
 
 
 
