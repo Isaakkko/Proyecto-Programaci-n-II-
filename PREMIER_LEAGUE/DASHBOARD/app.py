@@ -1,12 +1,13 @@
-
 import streamlit as st  # permite crear "interfaces" de manera sencilla
 import pandas as pd # ayuda con procesamiento de datos
-import altair as alt # ayuda a tener graficos interactivos y personalizados 
+import altair as alt # ayuda a tener graficos interactivos y personalizados
+import os
 
 st.title("Dashboard Premier League")
 
 # Cargar CSV
-df = pd.read_csv(r"C:\Proyecto 2 Progra 2\premier_clean.csv") # cambiar a ruta necesaria ya que streamlit trabaja local
+BASE_DIR = os.path.dirname(__file__)
+df = pd.read_csv(os.path.join(BASE_DIR, "../DATA/PROCESSED(LIMPIO)/premier_clean.csv"))
 
 # Vista previa
 st.write("Vista previa del dataset:")
@@ -24,9 +25,7 @@ df_grouped = df.groupby("Player", as_index=False).agg({
     "Touches": "sum"
 })
 
-
 # Gráfico 1 – Shot Creating Actions
-
 st.write("Top jugadores por Shot-Creating Actions")
 top_sca = df_grouped.sort_values("Shot-Creating Actions", ascending=False).head(10)
 
@@ -39,11 +38,9 @@ chart1 = (
         color="Player:N"
     )
 )
-st.altair_chart(chart1, use_container_width=True)
-
+st.altair_chart(chart1, width="stretch")
 
 # Gráfico 2 – Goals
-
 st.write("Top jugadores por Goals")
 top_goals = df_grouped.sort_values("Goals", ascending=False).head(10)
 
@@ -56,11 +53,9 @@ chart2 = (
         color="Player:N"
     )
 )
-st.altair_chart(chart2, use_container_width=True)
-
+st.altair_chart(chart2, width="stretch")
 
 # Gráfico 3 – Touches
-
 st.write("Jugadores con más Toques")
 top_touches = df_grouped.sort_values("Touches", ascending=False).head(10)
 
@@ -73,7 +68,8 @@ chart3 = (
         color="Player:N"
     )
 )
-st.altair_chart(chart3, use_container_width=True)
+st.altair_chart(chart3, width="stretch")
 
-
+#Terminal :
+# & "C:\Users\isaac\AppData\Local\Programs\Python\Python313\Scripts\streamlit.exe" run app.py
 
