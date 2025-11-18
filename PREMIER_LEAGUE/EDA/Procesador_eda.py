@@ -7,7 +7,6 @@ import seaborn as sns
 
 class ProcesadorEDA:
     def __init__(self, archivo_crudo, archivo_limpio):
-        # Inicialización de la clase con los archivos de entrada y salida
         self.__archivo_crudo = archivo_crudo
         self.__archivo_limpio = archivo_limpio
         self.df = pd.read_csv(self.__archivo_crudo)
@@ -29,7 +28,7 @@ class ProcesadorEDA:
         print(self.df.isnull().sum())
 
     def limpieza(self):
-        #Eliminar en "Age" los números innecesarios "-###"
+#Eliminar en "Age" los números innecesarios "-###"
         self.df["Age"] = self.df["Age"].str.split("-").str[0]
         self.df["Age"] = pd.to_numeric(self.df["Age"], errors="coerce")
         print(self.df["Age"].head())
@@ -40,7 +39,7 @@ class ProcesadorEDA:
 
     def valores_faltantes(self):
 #Exploración de valores faltantes y gráfico correspondiente
-    # Gráfico de missing values
+# Gráfico de missing values
         missing_values = self.df.isnull().sum()
         print(missing_values.head())
         sns.barplot(x=missing_values.index, y=missing_values)
@@ -74,7 +73,6 @@ class ProcesadorEDA:
     def guardar_dataframe(self):
 #Guardar archivo limpio
         self.df.to_csv(self.__archivo_limpio, index=False)
-        print(f"Dataframe limpio guardado en: {self.__archivo_limpio}")
 
 
 
