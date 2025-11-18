@@ -5,7 +5,7 @@ import pandas as pd
 class Visualizador:
 
     def __init__(self, df):
-        self.df = df
+        self.df = df5
 
     
     # 1. Barras: goles totales por equipo
@@ -79,6 +79,20 @@ class Visualizador:
         df = self.df.copy()
         df["MainPosition"] = df["Position"].astype(str).apply(lambda x: x.split(",")[0])
 
+        traductor_posiciones = {
+            "gk": "Portero",
+            "cb": "Defensa central",
+            "wb": "Carrilero",
+            "dm": "Mediocampista defensivo",
+            "cm": "Mediocampista central",
+            "lm": "Mediocampista izquierdo",
+            "rm": "Mediocampista derecho",
+            "lw": "Extremo izquierdo",
+            "rw": "Extremo derecho",
+            "fw": "Delantero",
+        }
+        df["MainPosition"] = df["MainPosition"].map(traductor_posiciones).fillna("Otros")
+
         counts = df["MainPosition"].value_counts()
 
         plt.figure(figsize=(8,8))
@@ -88,7 +102,6 @@ class Visualizador:
         plt.tight_layout()
         plt.show()
 
-    
     # 6. Mapa de calor: Minutes vs Passes Completed
     
     def mapa_calor_minutos_pases(self):
