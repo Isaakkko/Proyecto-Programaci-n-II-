@@ -29,11 +29,11 @@ El proyecto analiza este dataset para identificar patrones, relaciones entre var
 
 ---
 
-## 🧩 Arquitectura del proyecto
+# 🧩 Arquitectura del proyecto
 
 Este proyecto sigue una estructura modular orientada a objetos
 
-##✔️ Requerimientos técnicos
+#✔️ Requerimientos técnicos
 
 Python 3.10+
 
@@ -45,7 +45,7 @@ seaborn
 streamlit 
 
 
-##👉Contenido  y estructura del repositorio
+#👉Contenido  y estructura del repositorio
 
 + Premier League
     * CARGA_DATA
@@ -70,7 +70,7 @@ streamlit
 
 
 
-## ⚙️ Funcionalidades principales
+# ⚙️ Funcionalidades principales
 
 ### 1. 📥 Ingesta de datos — `CargadorDatos`
 La clase **CargadorDatos** se encarga de:
