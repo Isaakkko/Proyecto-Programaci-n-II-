@@ -12,7 +12,7 @@
 
 # 📊 Premier League Insights
 
-Este proyecto implementa un sistema orientado a objetos en Python para analizar datos reales de la Premier League (2024/2025). Incluye ingesta de datos, análisis exploratorio (EDA), modelado de entidades del dominio y visualización estática e interactiva.
+Este proyecto implementa un sistema orientado a objetos en Python para analizar datos reales de la Premier League (2024). Incluye ingesta de datos, análisis exploratorio (EDA), modelado de entidades y visualización estática e interactiva.
 
 ---
 
@@ -80,7 +80,8 @@ Premier League/
 │ └── Procesador_eda
 │
 ├── NOTEBOOKS/
-│
+│ ├── 01_EDA
+  └── 02_Visualizacion
 └── VISUALIZACIÓN/
 
 ```
@@ -127,4 +128,4 @@ Clases que representan entidades reales de la Premier League:
 
 
 
-#FIN
+# FIN
