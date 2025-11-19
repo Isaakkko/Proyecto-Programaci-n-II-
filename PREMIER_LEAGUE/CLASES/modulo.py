@@ -1,10 +1,10 @@
-from jugador import Jugador
-from equipo import Equipo
+from Jugador import Jugador
+from Equipo import Equipo
 import csv
 
 equipos = {}  ### Creamos la lista vacia para guardar jugadores ###
 
-ruta = r"C:\Proyecto 2 Progra 2\premier_clean.csv"   ### Cambiar ruta 
+ruta = r"../DATA/PROCESSED(LIMPIO)/premier_clean.csv"
 
 with open(ruta, encoding="utf-8") as archivo:
     lector = csv.DictReader(archivo)
