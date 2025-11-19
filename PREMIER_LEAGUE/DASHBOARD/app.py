@@ -71,5 +71,7 @@ chart3 = (
 st.altair_chart(chart3, width="stretch")
 
 #Terminal :
-# & "C:\Users\isaac\AppData\Local\Programs\Python\Python313\Scripts\streamlit.exe" run app.py
+#cd C:\Users\isaac\Documents\Fuentes_git\PREMIER_LEAGUE\DASHBOARD
+#& "C:\Users\isaac\AppData\Local\Programs\Python\Python313\Scripts\streamlit.exe" run app.py
+
 
